@@ -1,5 +1,4 @@
-import {Button, Container, Form, Image, Modal, Row, Stack} from "react-bootstrap";
-import {useState} from "react";
+import {Button, Form, Modal, Stack} from "react-bootstrap";
 
 export default function AuthModal({show, onHide}: { show: boolean, onHide: () => void }) {
     return (
