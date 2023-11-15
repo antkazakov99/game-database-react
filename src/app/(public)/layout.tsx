@@ -13,7 +13,7 @@ export default function RootLayout({
     <html data-bs-theme="light">
       <body>
       <header>
-        <Navbar className={'bg-gradient'}>
+        <Navbar>
             <Container>
                 <NavbarBrand href={"/"}>GameDatabase</NavbarBrand>
                 <Nav className="me-auto">

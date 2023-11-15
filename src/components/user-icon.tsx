@@ -1,8 +1,9 @@
 "use client";
 
-import {Image} from "react-bootstrap";
+import {NavLink} from "react-bootstrap";
 import {useState} from "react";
 import AuthModal from "@/components/auth-modal";
+import {Person} from "react-bootstrap-icons";
 
 export default function UserIcon() {
     const [show, setShow] = useState(false);
@@ -12,8 +13,11 @@ export default function UserIcon() {
 
     return (
         <>
-            <Image src={"/person.svg"} width={32} height={32} roundedCircle={true} thumbnail={true} onClick={handleShow}></Image>
-
+            <NavLink onClick={handleShow}>
+                <picture>
+                    <Person className={'rounded-circle img-thumbnail'} width={36} height={36} />
+                </picture>
+            </NavLink>
             <AuthModal show={show} onHide={handleClose} />
         </>
     )
