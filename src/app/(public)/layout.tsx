@@ -9,14 +9,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html data-bs-theme="dark">
+    <html data-bs-theme="light">
       <body>
       <header>
-        <Navbar bg={'secondary'} className={'bg-gradient'}>
+        <Navbar className={'bg-gradient'}>
             <Container>
                 <NavbarBrand href={"/"}>GameDatabase</NavbarBrand>
                 <Nav className="me-auto">
                     <NavLink href={"/games"}>Игры</NavLink>
+                    <NavLink href={"/calendar"}>Календарь</NavLink>
                 </Nav>
             </Container>
         </Navbar>
