@@ -2,9 +2,9 @@
 
 import {NavDropdown, NavLink} from "react-bootstrap";
 import {useState} from "react";
-import AuthModal from "@/components/auth-modal";
 import {Person} from "react-bootstrap-icons";
 import {signOut, useSession} from "next-auth/react";
+import AuthModal from "@/components/auth/auth-modal";
 
 export default function UserIcon() {
     const [show, setShow] = useState(false);
