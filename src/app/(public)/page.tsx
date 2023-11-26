@@ -1,5 +1,5 @@
 export default function Home() {
   return (
-    <div>This is main page!</div>
+      <h1 className={'h1'}>Work in progress!</h1>
   )
 }

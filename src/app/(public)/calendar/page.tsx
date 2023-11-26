@@ -1,5 +1,5 @@
 export default function UserPage() {
     return (
-        <div>Hello, calendar!</div>
+        <h1 className={'h1'}>Work in progress!</h1>
     )
 }

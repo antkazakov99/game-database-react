@@ -26,12 +26,11 @@ export default function UserIcon() {
         )
     } else {
         return (
-            <NavDropdown title={
+            <NavDropdown align={'end'} title={
                 <picture>
                     <Person className={'rounded-circle img-thumbnail'} width={36} height={36}/>
                 </picture>
             }>
-                <NavDropdown.Divider/>
                 <NavDropdown.Item onClick={() => signOut()}>Выйти</NavDropdown.Item>
             </NavDropdown>
         )
