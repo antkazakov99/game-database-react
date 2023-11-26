@@ -6,12 +6,13 @@ export const authConfig = {
         Credentials({
             type: "credentials",
             credentials: {
+                email: {label: "Email", type: "email"},
                 username: {label: "Username", type: "text"},
                 password: {label: "Password", type: "password"}
             },
             authorize(credentials, req) {
-                if (credentials.username === "admin" && credentials.password === "123") {
-                    return {id: "1", name: credentials.username, email: "jsmith@example.com"};
+                if (credentials.email === "ant.kazakov99@gmail.com" && credentials.password === "123") {
+                    return {id: "1", name: "", email: credentials.email};
                 } else {
                     return null;
                 }
