@@ -1,6 +1,4 @@
-import {Card, CardBody, CardHeader, Col, Container, Image, Row} from "react-bootstrap";
-import {Style_Script} from "next/dist/compiled/@next/font/dist/google";
-import {Heart, HeartFill, Plus, PlusLg} from "react-bootstrap-icons";
+import {Card, CardHeader, Col, Image, Row} from "react-bootstrap";
 
 export default function GameCard() {
     return (
