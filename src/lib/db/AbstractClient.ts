@@ -12,7 +12,7 @@ export default abstract class AbstractClient<Type> {
         const result = await client.query(query, params);
         client.release();
 
-        if (result.rowCount === null) {
+        if (result.rowCount === 0) {
             return null;
         }
 

@@ -1,16 +1,24 @@
-class User {
+export default class User {
     private readonly _id: number | null;
     private _email: string;
     private _username: string | null;
     private _password: string;
     private _isAdmin: boolean;
 
-    constructor(id: number, email: string, password: string, username: string | null = null, isAdmin: boolean = false) {
+    constructor(id: number | null, username: string | null = null, email: string, password: string, isAdmin: boolean = false) {
         this._id = id;
-        this._email = email;
         this._username = username;
+        this._email = email;
         this._password = password;
         this._isAdmin = false;
+    }
+
+    get username(): string | null {
+        return this._username;
+    }
+
+    set username(value: string | null) {
+        this._username = value;
     }
 
     public get id() {
@@ -23,14 +31,6 @@ class User {
 
     set email(value: string) {
         this._email = value;
-    }
-
-    get username(): string | null {
-        return this._username;
-    }
-
-    set username(value: string | null) {
-        this._username = value;
     }
 
     get password(): string {

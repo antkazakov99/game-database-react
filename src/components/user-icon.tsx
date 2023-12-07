@@ -8,12 +8,13 @@ import AuthModal from "@/components/auth/auth-modal";
 
 export default function UserIcon() {
     const [show, setShow] = useState(false);
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const {data} = useSession();
 
-    if (!data) {
+    if (data === null) {
         return (
             <>
                 <NavLink onClick={handleShow}>
@@ -27,9 +28,10 @@ export default function UserIcon() {
     } else {
         return (
             <NavDropdown align={'end'} title={
-                <picture>
+                <span>
+                    <span href={""} className={'link-secondary me-2'}>{data!!.user!!.name}</span>
                     <Person className={'rounded-circle img-thumbnail'} width={36} height={36}/>
-                </picture>
+                </span>
             }>
                 <NavDropdown.Item onClick={() => signOut()}>Выйти</NavDropdown.Item>
             </NavDropdown>

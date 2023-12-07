@@ -11,7 +11,7 @@ export default function AuthModal({show, onHide}: { show: boolean, onHide: () =>
 
     return (
         <Modal show={show} onHide={onHide} size={"sm"} centered={true}>
-            { isSignIn ? <SignInForm onHide={onHide} onSignUp={handleIsSignUp} /> : <SignUpForm onHide={onHide} onSignUp={handleIsSignIn} />}
+            { isSignIn ? <SignInForm onHide={onHide} onSignUp={handleIsSignUp} /> : <SignUpForm onHide={onHide} onSignIn={handleIsSignIn} />}
         </Modal>
     )
 }

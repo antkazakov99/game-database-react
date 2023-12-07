@@ -1,4 +1,5 @@
 import AbstractClient from "@/lib/db/AbstractClient";
+import User from "@/lib/entries/User";
 
 export default class UserClient extends AbstractClient<User> {
     async getById(id: number): Promise<User | null> {
@@ -21,6 +22,11 @@ export default class UserClient extends AbstractClient<User> {
         return this.findOne(query, [username]);
     }
 
+    async add(user: User): Promise<void> {
+        const query: string = 'INSERT INTO users (username, email, password, is_admin) VALUES($1, $2, $3, $4)';
+        await this.exec(query, [user.username, user.email, user.password, user.isAdmin]);
+    }
+
     protected createObject(fields: {
         id: number,
         email: string,
@@ -28,6 +34,6 @@ export default class UserClient extends AbstractClient<User> {
         password: string,
         is_admin: boolean
     }): User {
-        return new User(fields.id, fields.email, fields.password, fields.username, fields.is_admin);
+        return new User(fields.id, fields.username, fields.email, fields.password, fields.is_admin);
     }
 }
