@@ -21,7 +21,7 @@ export default async function GamePage({params}: { params: { id: string } }) {
             <Row className={'game-card-content'}>
                 <Col xxl={'auto'}>
                     <div className={'game-page-cover d-flex align-items-center'}>
-                        <Image src={`/games/covers/vertical/${id}.jpg`} className={'mh-100 mw-100 img-thumbnail'}></Image>
+                        <Image src={`/games/covers/vertical/${id}.jpg`} className={'mh-100 mw-100 img-thumbnail mx-auto'}></Image>
                     </div>
                 </Col>
                 <Col>
