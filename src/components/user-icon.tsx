@@ -29,7 +29,7 @@ export default function UserIcon() {
         return (
             <NavDropdown align={'end'} title={
                 <span>
-                    <span href={""} className={'link-secondary me-2'}>{data!!.user!!.name}</span>
+                    <span className={'link-secondary me-2'}>{data!!.user!!.name}</span>
                     <Person className={'rounded-circle img-thumbnail'} width={36} height={36}/>
                 </span>
             }>
