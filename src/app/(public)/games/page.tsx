@@ -1,7 +1,16 @@
 import {Card, CardBody, CardHeader, Col, Container, Row, Stack} from "react-bootstrap";
 import GameCard from "@/components/games/game-card";
+import Registry from "@/lib/Registry";
+import Game from "@/lib/entries/Game";
 
-export default function Games() {
+export default async function Games() {
+    const games = await Registry.instance.gameClient.getAll();
+
+
+    const gamesCards = games.map((game: Game) => {
+        return <GameCard game={{id: game.id!!, name: game.name, release: game.release, url: game.url}}/>
+    })
+
     return (
         <>
             <Row>
@@ -10,22 +19,7 @@ export default function Games() {
                 </Col>
                 <Col xs={8}>
                     <Stack>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
-                        <GameCard/>
+                        {gamesCards}
                     </Stack>
                 </Col>
             </Row>

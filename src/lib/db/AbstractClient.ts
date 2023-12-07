@@ -1,8 +1,10 @@
-abstract class AbstractClient<Type>
+import {Pool} from "pg";
+
+export default abstract class AbstractClient
 {
-    public abstract  getById(id: number): Type | null;
-    public abstract getByFilter(filter: AbstractFilter<Type>): Type[];
-    public abstract add(game: Type): void;
-    public abstract update(game: Type): void;
-    public abstract delete(id: number): void;
+    protected clientPool: Pool;
+
+    constructor(clientPool: Pool) {
+        this.clientPool = clientPool
+    }
 }

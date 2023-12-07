@@ -1,11 +1,10 @@
-import {Client, Pool} from "pg";
+import {Pool} from "pg";
 import Game from "@/lib/entries/Game";
+import AbstractClient from "@/lib/db/AbstractClient";
 
-export default class GameClient {
-    private clientPool: Pool;
-
+export default class GameClient extends AbstractClient {
     constructor(clientPool: Pool) {
-        this.clientPool = clientPool
+        super(clientPool);
     }
 
     async add(game: Game): Promise<void> {
@@ -35,9 +34,32 @@ export default class GameClient {
         // todo Add game delete
     }
 
-    getByFilter(filter: AbstractFilter<Game>): Game[] {
+    getByFilter(filter: AbstractFilter<Game>, {page, size}: { page: number, size: number }): Game[] {
         // todo Add select by filter
         return [];
+    }
+
+    async getAll({page, size}: { page: number | null, size: number | null } = {
+        page: null,
+        size: null
+    }): Promise<Game[]> {
+        const limit = size != null ? size : 'ALL';
+        const offset = size != null && page != null ? size * (page - 1) : 0;
+        const query = `SELECT games.id, games.name, games.release, games.description, games.url FROM games LIMIT ${limit} OFFSET ${offset}`;
+
+        const client = await this.clientPool.connect();
+        const result = await client.query(query);
+        client.release();
+
+        return result.rows.map((value: {
+            id: string,
+            name: string,
+            release: string,
+            description: string,
+            url: string
+        }) => {
+            return new Game(parseInt(value['id']), value['name'], new Date(value['release']), value['description'], value['url']);
+        });
     }
 
     async getById(id: number): Promise<Game | null> {
@@ -50,8 +72,8 @@ export default class GameClient {
             return null;
         }
 
-        const game = result.rows[0];
-        return new Game(game['id'], game['name'], game['release'], game['description'], game['url']);
+        const game: { id: string, name: string, release: string, description: string, url: string } = result.rows[0];
+        return new Game(parseInt(game.id), game.name, new Date(game.release), game.description, game.url);
     }
 
     update(game: Game): void {

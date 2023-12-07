@@ -1,14 +1,7 @@
-.game-card {
-    /*padding: 3px;*/
-}
-
 .game-card-content {
     height: 135px;
 }
 
-/* Cover ratio 27x40 */
-/* 135x200 */
-/* 108x160 */
 /* Cover ratio 16x9 */
 /* 160x90 */
 /* 200x112.5 */
@@ -19,6 +12,10 @@
     height: 135px;
 }
 
-.game-card * {
-    /* border: 1px rgb(128, 128, 128) dashed; */
+/* Cover ratio 27x40 */
+/* 135x200 */
+/* 108x160 */
+.game-page-cover {
+    width: 270px;
+    height: 400px;
 }

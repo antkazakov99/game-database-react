@@ -54,4 +54,11 @@ export default class Game {
     set url(value: string) {
         this._url = value;
     }
+
+    public values(): { id: number | null } {
+        return {
+            id: this.id,
+
+        }
+    }
 }
