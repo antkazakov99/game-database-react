@@ -7,14 +7,8 @@ export default class GameClient extends AbstractClient<Game> {
         super(clientPool);
     }
 
-    async getAll({page, size}: { page: number | null, size: number | null } = {
-        page: null,
-        size: null
-    }): Promise<Game[]> {
-        const limit = size != null ? size : 'ALL';
-        const offset = size != null && page != null ? size * (page - 1) : 0;
-        const query = `SELECT games.id, games.name, games.release, games.description, games.url FROM games LIMIT ${limit} OFFSET ${offset}`;
-
+    async getAll(): Promise<Game[]> {
+        const query = 'SELECT games.id, games.name, games.release, games.description, games.url FROM games';
         return this.findMany(query);
     }
 
