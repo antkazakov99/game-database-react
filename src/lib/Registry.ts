@@ -1,10 +1,12 @@
 import GameClient from "@/lib/db/GameClient";
 import {Pool} from "pg";
+import UserClient from "@/lib/db/UserClient";
 
 export default class Registry {
     private static _instance: Registry | null = null;
     private _dbClientPool: Pool | null = null;
     private _gameClient: GameClient | null = null;
+    private _userClient: UserClient | null = null;
     private _config: any | null = null;
     private _dateTimeFormatter: Intl.DateTimeFormat | null = null;
 
@@ -39,6 +41,13 @@ export default class Registry {
             this._gameClient = new GameClient(this.dbClientPool);
         }
         return this._gameClient;
+    }
+
+    public get userClient() {
+        if (!this._userClient) {
+            this._userClient = new UserClient(this.dbClientPool);
+        }
+        return this._userClient;
     }
 
     public get dateTimeFormatter() {
