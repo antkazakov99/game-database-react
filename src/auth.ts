@@ -14,13 +14,9 @@ export const authConfig = {
                 const userClient = Registry.instance.userClient;
                 const user = await userClient.getByEmail(credentials.email);
 
-                console.log([user, user!!.password, credentials.password, user!!.password === credentials.password]);
-
                 if (user !== null && user.password === credentials.password) {
-                    console.log('confused');
-                    return {id: "1", name: user.username, email: user.email};
+                    return {id: user.id!!.toString(), name: user.username, email: user.email};
                 } else {
-                    console.log('sad');
                     return null;
                 }
             }
