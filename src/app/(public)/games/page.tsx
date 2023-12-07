@@ -8,7 +8,7 @@ export default async function Games() {
 
 
     const gamesCards = games.map((game: Game) => {
-        return <GameCard game={{id: game.id!!, name: game.name, release: game.release, url: game.url}}/>
+        return <GameCard key={game.id} game={{id: game.id!!, name: game.name, release: game.release, url: game.url}}/>
     })
 
     return (

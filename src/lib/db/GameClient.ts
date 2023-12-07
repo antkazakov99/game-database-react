@@ -14,7 +14,7 @@ export default class GameClient extends AbstractClient<Game> {
 
     async getById(id: number): Promise<Game | null> {
         const query = 'SELECT games.id, games.name, games.release, games.description, games.url FROM games WHERE games.id = $1';
-        return this.findOne(query);
+        return this.findOne(query, [id]);
     }
 
     protected createObject(fields: {
