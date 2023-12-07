@@ -33,6 +33,8 @@ export default function UserIcon() {
                     <Person className={'rounded-circle img-thumbnail'} width={36} height={36}/>
                 </span>
             }>
+                <NavDropdown.Item href={`/user/${data.user?.name}`}>Профиль</NavDropdown.Item>
+                <NavDropdown.Divider/>
                 <NavDropdown.Item onClick={() => signOut()}>Выйти</NavDropdown.Item>
             </NavDropdown>
         )
