@@ -1,7 +1,7 @@
 import AbstractService from "@/lib/services/AbstractService";
-import FavoriteGame from "@/lib/entries/FavoriteGame";
 import Registry from "@/lib/Registry";
 import {Awaitable} from "@auth/core/types";
+import FavoriteGame from "@/lib/entities/FavoriteGame";
 
 export default class FavoriteGameService extends AbstractService<FavoriteGame> {
     /**
@@ -42,7 +42,11 @@ export default class FavoriteGameService extends AbstractService<FavoriteGame> {
         return await this.findMany(query, [userId]);
     }
 
-    protected createObject(fields: { user_id: number, game_id: number, status_id: number | null }): Awaitable<FavoriteGame> {
+    protected createObject(fields: {
+        user_id: number,
+        game_id: number,
+        status_id: number | null
+    }): Awaitable<FavoriteGame> {
         let status = null;
 
         if (fields.status_id === null) {

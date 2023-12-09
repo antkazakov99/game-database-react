@@ -1,6 +1,6 @@
 import {useState} from "react";
-import SignInForm from "@/components/auth/SignInForm";
-import SignUpForm from "@/components/auth/SignUpForm";
+import SignInForm from "@/lib/components/auth/SignInForm";
+import SignUpForm from "@/lib/components/auth/SignUpForm";
 import {Modal} from "react-bootstrap";
 
 export default function AuthModal({show, onHide}: { show: boolean, onHide: () => void }) {

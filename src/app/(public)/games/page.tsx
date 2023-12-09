@@ -1,7 +1,7 @@
 import {Col, Row, Stack} from "react-bootstrap";
-import GameCard from "@/components/games/GameCard";
+import GameCard from "@/lib/components/games/GameCard";
 import Registry from "@/lib/Registry";
-import Game from "@/lib/entries/Game";
+import Game from "@/lib/entities/Game";
 
 export default async function Games() {
     const games = await Registry.instance.gameService.getAll();

@@ -1,4 +1,5 @@
 import AbstractService from "@/lib/services/AbstractService";
+import Status from "@/lib/entities/Status";
 
 export default class StatusService extends AbstractService<Status> {
     /**

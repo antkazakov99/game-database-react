@@ -1,5 +1,5 @@
 import {Pool} from "pg";
-import Game from "@/lib/entries/Game";
+import Game from "@/lib/entities/Game";
 import AbstractService from "@/lib/services/AbstractService";
 
 export default class GameService extends AbstractService<Game> {

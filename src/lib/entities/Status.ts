@@ -1,4 +1,4 @@
-class Status {
+export default class Status {
     private readonly _id: number | null;
     private  _name: string;
 

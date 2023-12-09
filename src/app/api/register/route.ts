@@ -1,5 +1,5 @@
 import Registry from "@/lib/Registry";
-import User from "@/lib/entries/User";
+import User from "@/lib/entities/User";
 
 export async function POST(request: Request): Promise<Response> {
     const registerData: {username: string, email: string, password: string} = await request.json();

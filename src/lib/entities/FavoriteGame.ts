@@ -1,3 +1,5 @@
+import Status from "@/lib/entities/Status";
+
 export default class FavoriteGame {
     private readonly _userId: number;
     private readonly _gameId: number;

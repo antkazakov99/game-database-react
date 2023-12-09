@@ -1,7 +1,7 @@
 import {Card, CardBody, CardHeader, Col, Image, Row} from "react-bootstrap";
 import Link from "next/link";
 import * as fs from "fs";
-import Game from "@/lib/entries/Game";
+import Game from "@/lib/entities/Game";
 
 export default function GameCard({game}: { game: Game }) {
     const defaultPath = 'games/covers/horizontal/default.jpg';

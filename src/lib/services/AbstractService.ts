@@ -1,7 +1,8 @@
 import {Pool} from "pg";
 import {Awaitable} from "@auth/core/types";
+import AbstractEntity from "@/lib/entities/AbstractEntity";
 
-export default abstract class AbstractService<Type> {
+export default abstract class AbstractService<Type extends AbstractEntity> {
     private clientPool: Pool;
 
     constructor(clientPool: Pool) {

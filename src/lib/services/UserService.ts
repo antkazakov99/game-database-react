@@ -1,5 +1,5 @@
 import AbstractService from "@/lib/services/AbstractService";
-import User from "@/lib/entries/User";
+import User from "@/lib/entities/User";
 
 export default class UserService extends AbstractService<User> {
     async getById(id: number): Promise<User | null> {
