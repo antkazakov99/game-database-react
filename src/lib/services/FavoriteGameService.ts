@@ -1,9 +1,9 @@
-import AbstractClient from "@/lib/db/AbstractClient";
+import AbstractService from "@/lib/services/AbstractService";
 import FavoriteGame from "@/lib/entries/FavoriteGame";
 import Registry from "@/lib/Registry";
 import {Awaitable} from "@auth/core/types";
 
-export default class FavoriteGamesClient extends AbstractClient<FavoriteGame> {
+export default class FavoriteGameService extends AbstractService<FavoriteGame> {
     /**
      * Добавляет игру в список избранного пользователя
      * @param favoriteGame
@@ -50,7 +50,7 @@ export default class FavoriteGamesClient extends AbstractClient<FavoriteGame> {
         }
 
         return (async () => {
-            const status = await Registry.instance.statusClient.getById(fields.status_id!!);
+            const status = await Registry.instance.statusService.getById(fields.status_id!!);
             return new FavoriteGame(fields.user_id, fields.game_id, status);
         })();
     }

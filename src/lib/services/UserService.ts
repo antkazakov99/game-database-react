@@ -1,7 +1,7 @@
-import AbstractClient from "@/lib/db/AbstractClient";
+import AbstractService from "@/lib/services/AbstractService";
 import User from "@/lib/entries/User";
 
-export default class UserClient extends AbstractClient<User> {
+export default class UserService extends AbstractService<User> {
     async getById(id: number): Promise<User | null> {
         const query: string = 'SELECT users.id, users.email, users.password, users.username,users.is_admin FROM users WHERE users.id = $1';
         return this.findOne(query, [id]);

@@ -1,6 +1,6 @@
-import AbstractClient from "@/lib/db/AbstractClient";
+import AbstractService from "@/lib/services/AbstractService";
 
-export default class StatusClient extends AbstractClient<Status> {
+export default class StatusService extends AbstractService<Status> {
     /**
      * Добавляет статус
      * @param status

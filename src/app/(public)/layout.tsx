@@ -2,7 +2,7 @@ import React from "react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
-import UserIcon from "@/components/user-icon";
+import UserIcon from "@/components/UserIcon";
 import '@/css/public.css'
 
 export default async function PublicRootLayout({children}: { children: React.ReactNode }) {

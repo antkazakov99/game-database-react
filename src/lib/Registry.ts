@@ -1,18 +1,18 @@
-import GameClient from "@/lib/db/GameClient";
+import GameService from "@/lib/services/GameService";
 import {Pool} from "pg";
-import UserClient from "@/lib/db/UserClient";
-import FavoriteGamesClient from "@/lib/db/FavoriteGamesClient";
-import StatusClient from "@/lib/db/StatusClient";
+import UserService from "@/lib/services/UserService";
+import FavoriteGameService from "@/lib/services/FavoriteGameService";
+import StatusService from "@/lib/services/StatusService";
 
 export default class Registry {
     private static _instance: Registry | null = null;
     private _dbClientPool: Pool | null = null;
-    private _gameClient: GameClient | null = null;
-    private _userClient: UserClient | null = null;
+    private _gameService: GameService | null = null;
+    private _userService: UserService | null = null;
     private _config: any | null = null;
     private _dateTimeFormatter: Intl.DateTimeFormat | null = null;
-    private _favoriteGamesClient: FavoriteGamesClient | null = null;
-    private _statusClient: StatusClient | null = null;
+    private _favoriteGamesService: FavoriteGameService | null = null;
+    private _statusService: StatusService | null = null;
 
     private constructor() {
     }
@@ -40,18 +40,18 @@ export default class Registry {
         return this._dbClientPool;
     }
 
-    public get gameClient() {
-        if (!this._gameClient) {
-            this._gameClient = new GameClient(this.dbClientPool);
+    public get gameService() {
+        if (!this._gameService) {
+            this._gameService = new GameService(this.dbClientPool);
         }
-        return this._gameClient;
+        return this._gameService;
     }
 
-    public get userClient() {
-        if (!this._userClient) {
-            this._userClient = new UserClient(this.dbClientPool);
+    public get userService() {
+        if (!this._userService) {
+            this._userService = new UserService(this.dbClientPool);
         }
-        return this._userClient;
+        return this._userService;
     }
 
     public get dateTimeFormatter() {
@@ -68,17 +68,17 @@ export default class Registry {
         return this._dateTimeFormatter;
     }
 
-    public get favoriteGamesClient() {
-        if (!this._favoriteGamesClient) {
-            this._favoriteGamesClient = new FavoriteGamesClient(this.dbClientPool);
+    public get favoriteGamesService() {
+        if (!this._favoriteGamesService) {
+            this._favoriteGamesService = new FavoriteGameService(this.dbClientPool);
         }
-        return this._favoriteGamesClient;
+        return this._favoriteGamesService;
     }
 
-    public get statusClient() {
-        if (!this._statusClient) {
-            this._statusClient = new StatusClient(this.dbClientPool);
+    public get statusService() {
+        if (!this._statusService) {
+            this._statusService = new StatusService(this.dbClientPool);
         }
-        return this._statusClient;
+        return this._statusService;
     }
 }
