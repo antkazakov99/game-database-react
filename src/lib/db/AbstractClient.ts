@@ -1,4 +1,5 @@
 import {Pool} from "pg";
+import {Awaitable} from "@auth/core/types";
 
 export default abstract class AbstractClient<Type> {
     private clientPool: Pool;
@@ -24,7 +25,7 @@ export default abstract class AbstractClient<Type> {
         const result = await client.query(query, params);
         client.release();
 
-        return result.rows.map((value) => this.createObject(value));
+        return await Promise.all(result.rows.map((value) => this.createObject(value)));
     }
 
     protected async exec(query: string, params: any[] = []): Promise<void> {
@@ -33,5 +34,5 @@ export default abstract class AbstractClient<Type> {
         client.release();
     }
 
-    protected abstract createObject(fields: object): Type;
+    protected abstract createObject(fields: any): Awaitable<Type>;
 }

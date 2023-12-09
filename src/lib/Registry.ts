@@ -1,6 +1,8 @@
 import GameClient from "@/lib/db/GameClient";
 import {Pool} from "pg";
 import UserClient from "@/lib/db/UserClient";
+import FavoriteGamesClient from "@/lib/db/FavoriteGamesClient";
+import StatusClient from "@/lib/db/StatusClient";
 
 export default class Registry {
     private static _instance: Registry | null = null;
@@ -9,6 +11,8 @@ export default class Registry {
     private _userClient: UserClient | null = null;
     private _config: any | null = null;
     private _dateTimeFormatter: Intl.DateTimeFormat | null = null;
+    private _favoriteGamesClient: FavoriteGamesClient | null = null;
+    private _statusClient: StatusClient | null = null;
 
     private constructor() {
     }
@@ -62,5 +66,19 @@ export default class Registry {
             )
         }
         return this._dateTimeFormatter;
+    }
+
+    public get favoriteGamesClient() {
+        if (!this._favoriteGamesClient) {
+            this._favoriteGamesClient = new FavoriteGamesClient(this.dbClientPool);
+        }
+        return this._favoriteGamesClient;
+    }
+
+    public get statusClient() {
+        if (!this._statusClient) {
+            this._statusClient = new StatusClient(this.dbClientPool);
+        }
+        return this._statusClient;
     }
 }
