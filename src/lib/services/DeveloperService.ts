@@ -2,7 +2,7 @@ import {Awaitable} from "@auth/core/types";
 import Developer from "@/lib/entities/Developer";
 import AbstractService from "@/lib/services/AbstractService";
 
-export class DeveloperService extends AbstractService<Developer> {
+export default class DeveloperService extends AbstractService<Developer> {
 
     /**
      * Возвращает разработчика с указанным ID
@@ -19,6 +19,11 @@ export class DeveloperService extends AbstractService<Developer> {
     async getAll(): Promise<Developer[]> {
         const query = 'SELECT id, name FROM developers';
         return await this.findMany(query);
+    }
+
+    async getByGameId(gameId: number): Promise<Developer[]> {
+        const query = 'SELECT developers.id, developers.name FROM developers INNER JOIN games_developers ON developers.id = games_developers.developer_id WHERE games_developers.game_id = $1';
+        return await this.findMany(query, [gameId]);
     }
 
     /**

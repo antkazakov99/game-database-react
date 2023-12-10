@@ -2,7 +2,7 @@ import Genre from "@/lib/entities/Genre";
 import {Awaitable} from "@auth/core/types";
 import AbstractService from "@/lib/services/AbstractService";
 
-class GamesCollectionService extends AbstractService<GamesCollection> {
+export default class GamesCollectionService extends AbstractService<GamesCollection> {
     /**
      * Возвращает коллекцию игр с указанным ID
      * @param id

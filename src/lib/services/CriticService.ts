@@ -2,7 +2,7 @@ import {Awaitable} from "@auth/core/types";
 import AbstractService from "@/lib/services/AbstractService";
 import Critic from "@/lib/entities/Critic";
 
-export class CriticService extends AbstractService<Critic> {
+export default class CriticService extends AbstractService<Critic> {
     /**
      * Возвращает критика с указанным ID
      * @param id
