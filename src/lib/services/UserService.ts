@@ -27,6 +27,11 @@ export default class UserService extends AbstractService<User> {
         await this.exec(query, [user.username, user.email, user.password, user.isAdmin]);
     }
 
+    async delete(id: number): Promise<void> {
+        const query = 'DELETE FROM users WHERE id = $1';
+        await this.exec(query, [id]);
+    }
+
     protected createObject(fields: {
         id: number,
         email: string,

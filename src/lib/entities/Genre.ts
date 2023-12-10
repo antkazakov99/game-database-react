@@ -1,4 +1,4 @@
-export default class Developer {
+export default class Genre {
     private readonly _id: number | null;
     private _name: string;
 

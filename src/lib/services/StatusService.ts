@@ -1,7 +1,25 @@
 import AbstractService from "@/lib/services/AbstractService";
 import Status from "@/lib/entities/Status";
+import Publisher from "@/lib/entities/Publisher";
 
 export default class StatusService extends AbstractService<Status> {
+    /**
+     * Возвращает статус с указанным ID
+     * @param id
+     */
+    async getById(id: number): Promise<Status | null> {
+        const query = 'SELECT id, name FROM statuses WHERE id = $1';
+        return await this.findOne(query, [id]);
+    }
+
+    /**
+     * Возвращает все статусы
+     */
+    async getAll(): Promise<Status[]> {
+        const query = 'SELECT id, name FROM statuses';
+        return await this.findMany(query);
+    }
+
     /**
      * Добавляет статус
      * @param status
@@ -13,28 +31,19 @@ export default class StatusService extends AbstractService<Status> {
 
     /**
      * Удаляет статус
-     * @param statusId
+     * @param id
      */
-    async delete(statusId: number): Promise<void> {
+    async delete(id: number): Promise<void> {
         const query = 'DELETE FROM statuses WHERE statuses.id = $1';
-        await this.exec(query, [statusId]);
+        await this.exec(query, [id]);
     }
 
     /**
-     * Возвращает статус с указанным ID
-     * @param statusId
+     * Изменяет статус
+     * @param status
      */
-    async getById(statusId: number): Promise<Status | null> {
-        const query = 'SELECT id, name FROM statuses WHERE id = $1';
-        return await this.findOne(query, [statusId]);
-    }
-
-    /**
-     * Возвращает все статусы
-     */
-    async getAll(): Promise<Status[]> {
-        const query = 'SELECT id, name FROM statuses';
-        return await this.findMany(query);
+    async update(status: Status): Promise<void> {
+        // todo Add
     }
 
     protected createObject(fields: { id: number, name: string }): Status {

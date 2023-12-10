@@ -1,4 +1,4 @@
-export default class Developer {
+export default class Publisher {
     private readonly _id: number | null;
     private _name: string;
 

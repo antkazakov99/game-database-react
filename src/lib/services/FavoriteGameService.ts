@@ -2,8 +2,28 @@ import AbstractService from "@/lib/services/AbstractService";
 import Registry from "@/lib/Registry";
 import {Awaitable} from "@auth/core/types";
 import FavoriteGame from "@/lib/entities/FavoriteGame";
+import Developer from "@/lib/entities/Developer";
 
 export default class FavoriteGameService extends AbstractService<FavoriteGame> {
+    /**
+     * Возвращает запись о игре в списке избранного пользователя
+     * @param userId
+     * @param gameId
+     */
+    async get(userId: number, gameId: number) {
+        const query = 'SELECT user_id, game_id, status_id FROM favorite_games WHERE user_id = $1 AND game_id = $2';
+        return await this.findOne(query, [userId, gameId]);
+    }
+
+    /**
+     * Возвращает игры в списке избранного пользователя
+     * @param userId
+     */
+    async getByUserId(userId: number) {
+        const query = 'SELECT user_id, game_id, status_id FROM favorite_games WHERE user_id = $1';
+        return await this.findMany(query, [userId]);
+    }
+
     /**
      * Добавляет игру в список избранного пользователя
      * @param favoriteGame
@@ -24,22 +44,11 @@ export default class FavoriteGameService extends AbstractService<FavoriteGame> {
     }
 
     /**
-     * Возвращает запись о игре в списке избранного пользователя
-     * @param userId
-     * @param gameId
+     * Изменяет статус игры в списке избранного
+     * @param favoriteGame
      */
-    async get(userId: number, gameId: number) {
-        const query = 'SELECT user_id, game_id, status_id FROM favorite_games WHERE user_id = $1 AND game_id = $2';
-        return await this.findOne(query, [userId, gameId]);
-    }
-
-    /**
-     * Возвращает игры в списке избранного пользователя
-     * @param userId
-     */
-    async getByUserId(userId: number) {
-        const query = 'SELECT user_id, game_id, status_id FROM favorite_games WHERE user_id = $1';
-        return await this.findMany(query, [userId]);
+    async update(favoriteGame: FavoriteGame): Promise<void> {
+        // todo Add
     }
 
     protected createObject(fields: {
