@@ -2,6 +2,7 @@ import {Card, CardBody, CardHeader, Col, Image, Row} from "react-bootstrap";
 import Link from "next/link";
 import * as fs from "fs";
 import Game from "@/lib/entities/Game";
+import Registry from '@/lib/Registry';
 
 export default function GameCard({game}: { game: Game }) {
     const defaultPath = 'games/covers/horizontal/default.jpg';
@@ -18,10 +19,11 @@ export default function GameCard({game}: { game: Game }) {
                     </div>
                 </Col>
                 <Col className={'ps-0'}>
-                    <CardHeader><Link href={`/game/${game.id}`}
-                                      className={'link-secondary'}>{game.name}</Link></CardHeader>
+                    <CardHeader><Link href={`/game/${game.id}`}>{game.name}</Link></CardHeader>
                     <CardBody>
-                        Описание игры. Work in progress!
+                        <div>Дата выхода: {game.release ? Registry.instance.dateTimeFormatter.format(game.release) : 'TBA'}</div>
+                        <div>Разработчик(и): {game.developers.map((value) => value.name).toString()}</div>
+                        <div>Издател(и): {game.publishers.map((value) => value.name).toString()}</div>
                     </CardBody>
                 </Col>
             </Row>

@@ -28,7 +28,7 @@ export default async function GamePage({params}: { params: { id: string } }) {
                     <h1 className={'h1'}>{game.name}</h1>
                     <div>Дата
                         выхода: {game.release ? Registry.instance.dateTimeFormatter.format(game.release) : 'TBA'}</div>
-                    <Link href={game.url} className={'link-secondary'}>{game.url}</Link>
+                    <Link href={game.url}>{game.url}</Link>
                     <div>{game.description}</div>
                 </Col>
             </Row>

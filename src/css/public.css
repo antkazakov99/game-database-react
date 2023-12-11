@@ -19,3 +19,43 @@
     width: 240px;
     height: 320px;
 }
+
+.menu-icon {
+    background-color: currentColor;
+    display: inline-block;
+    vertical-align: -.125em;
+}
+
+.user-icon {
+    background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity));
+    border: currentColor 1px solid;
+    -webkit-mask: url('/icons/person.svg') center no-repeat;
+    -webkit-mask-size: 70%;
+    width: 36px;
+    height: 36px;
+}
+
+.user-icon-border {
+    background-color: var(--bs-nav-link-color);
+    border-radius: 50%;
+}
+
+.user-icon-border:hover {
+    background-color: var(--bs-nav-link-hover-color);
+}
+
+.user-icon-link {
+    color: var(--bs-nav-link-color);
+}
+
+.user-icon-authorized .nav-link {
+    padding: 0;
+}
+
+.user-icon-authorized .dropdown-toggle:after {
+    border: 0;
+}
+
+.user-icon-authorized .dropdown-toggle {
+    border: 0;
+}

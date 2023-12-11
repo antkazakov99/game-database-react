@@ -10,7 +10,7 @@ export default class User {
         this._username = username;
         this._email = email;
         this._password = password;
-        this._isAdmin = false;
+        this._isAdmin = isAdmin;
     }
 
     get username(): string | null {

@@ -1,25 +1,16 @@
 import React from "react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
-import UserIcon from "@/lib/components/UserIcon";
+import {Container} from "react-bootstrap";
 import '@/css/public.css'
+import HeaderNavPanel from '@/lib/components/panels/HeaderNavPanel';
 
 export default async function PublicRootLayout({children}: { children: React.ReactNode }) {
     return (
-        <html data-bs-theme="light">
+        <html>
         <body>
-        <header className={'mb-3'}>
-            <Navbar>
-                <Container>
-                    <NavbarBrand href={"/"}>GameDatabase</NavbarBrand>
-                    <Nav className="me-auto">
-                        <NavLink href={"/games"}>Игры</NavLink>
-                        <NavLink href={"/calendar"}>Календарь</NavLink>
-                    </Nav>
-                    <UserIcon/>
-                </Container>
-            </Navbar>
+        <header>
+            <HeaderNavPanel/>
         </header>
         <main>
             <Container>{children}</Container>
@@ -27,4 +18,4 @@ export default async function PublicRootLayout({children}: { children: React.Rea
         </body>
         </html>
     )
-}
+};
