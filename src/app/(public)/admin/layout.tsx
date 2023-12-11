@@ -24,6 +24,7 @@ export default async function AdminDashboard({children}: { children: React.React
                 </div>
                 <div className={'vr p-0 ms-3 me-4 bg-secondary'}></div>
                 <div className={'col bg-light p-3 rounded'}>
+                    {children}
                 </div>
             </div>
         </div>

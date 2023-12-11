@@ -21,10 +21,11 @@ export default function SignUpForm({onHide, onSignIn}: { onHide: () => void, onS
 
     const register: FormEventHandler = async (e) => {
         e.preventDefault();
-        fetch('/api/register/', {
+        await fetch('/api/register/', {
             method: 'POST',
             body: JSON.stringify(userCredentials)
         });
+        onHide();
     };
 
     return (

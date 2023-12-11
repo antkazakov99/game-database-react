@@ -19,7 +19,7 @@ export default function MenuItem({href, value, iconPath}: { href: string, value:
     const pathName = usePathname();
     let color = 'link-dark';
     let active = '';
-    if (href === pathName) {
+    if (pathName.includes(href)) {
         active = 'active';
         color = '';
     }
