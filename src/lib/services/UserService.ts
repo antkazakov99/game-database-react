@@ -1,7 +1,7 @@
 import AbstractService from "@/lib/services/AbstractService";
 import User from "@/lib/entities/User";
 
-export default class UserReviewService extends AbstractService<User> {
+export default class UserService extends AbstractService<User> {
     async getById(id: number): Promise<User | null> {
         const query: string = 'SELECT users.id, users.email, users.password, users.username,users.is_admin FROM users WHERE users.id = $1';
         return this.findOne(query, [id]);

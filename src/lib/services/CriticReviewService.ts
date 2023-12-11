@@ -1,6 +1,7 @@
 import {Awaitable} from "@auth/core/types";
 import AbstractService from "@/lib/services/AbstractService";
 import CriticReview from "@/lib/entities/CriticReview";
+import Registry from '@/lib/Registry';
 
 export default class CriticReviewService extends AbstractService<CriticReview> {
     /**
@@ -46,6 +47,12 @@ export default class CriticReviewService extends AbstractService<CriticReview> {
      */
     async update(criticReview: CriticReview): Promise<void> {
         // todo Add
+    }
+
+    async getAvgRatingByGameId(id: number): Promise<number | null> {
+        const query = 'SELECT AVG(rating) as rating FROM critic_reviews WHERE game_id = $1';
+        const rows = await this.exec(query, [id]);
+        return rows[0].rating;
     }
 
     protected createObject(fields: {

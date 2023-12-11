@@ -7,7 +7,7 @@ import GamesCollectionService from '@/lib/services/GamesCollectionService';
 import GenreService from "@/lib/services/GenreService";
 import PublisherService from "@/lib/services/PublisherService";
 import StatusService from "@/lib/services/StatusService";
-import UserReviewService from "@/lib/services/UserService";
+import UserReviewService from "@/lib/services/UserReviewService";
 import UserService from "@/lib/services/UserService";
 import {Pool} from "pg";
 

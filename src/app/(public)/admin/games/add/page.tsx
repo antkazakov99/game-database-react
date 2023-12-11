@@ -79,9 +79,6 @@ export default function AddGame() {
     const router = useRouter();
     const handleSubmit: FormEventHandler = function (event) {
         event.preventDefault();
-
-        console.log(game);
-
         fetch('/api/games/add', {
             method: 'POST',
             body: JSON.stringify(game)

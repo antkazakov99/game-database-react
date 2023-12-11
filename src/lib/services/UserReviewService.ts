@@ -2,7 +2,7 @@ import AbstractService from "@/lib/services/AbstractService";
 import UserReview from "@/lib/entities/UserReview";
 import {Awaitable} from "@auth/core/types";
 
-class UserReviewService extends AbstractService<UserReview> {
+export default class UserReviewService extends AbstractService<UserReview> {
     /**
      * Возвращает рецензию пользователя о игре с указанным ID
      * @param userId
@@ -46,6 +46,12 @@ class UserReviewService extends AbstractService<UserReview> {
      */
     async update(userReview: UserReview): Promise<void> {
         // todo Add
+    }
+
+    async getAvgRatingByGameId(id: number): Promise<number | null> {
+        const query = 'SELECT AVG(rating) as rating FROM user_reviews WHERE game_id = $1';
+        const rows = await this.exec(query, [id]);
+        return rows[0].rating;
     }
 
     protected createObject(fields: { game_id: number, user_id: number, summary: string | null, rating: number | null }): Awaitable<UserReview> {
