@@ -12,13 +12,13 @@ export default async function Games() {
 
     return (
         <div className={'row'}>
-            <div className={'flex-column bg-light p-3 rounded'} style={{width: '400px'}}>
+            <div className={'flex-column bg-light p-3 rounded shadow'} style={{width: '400px'}}>
                 <form>
 
                 </form>
             </div>
             <div className={'vr p-0 ms-3 me-3 bg-secondary'}></div>
-            <div className={'col bg-light p-3 rounded'}>
+            <div className={'col bg-light p-4 rounded shadow'}>
                 <div className={'vstack'}>
                     {gamesCards}
                 </div>
