@@ -1,8 +1,9 @@
-import NextAuth from "next-auth"
+import NextAuth, {NextAuthConfig, Session, User} from "next-auth"
 import Credentials from "@auth/core/providers/credentials";
 import Registry from "@/lib/Registry";
+import {JWT} from '@auth/core/jwt';
 
-export const authConfig = {
+export const authConfig: NextAuthConfig = {
     providers: [
         Credentials({
             type: "credentials",
@@ -10,7 +11,7 @@ export const authConfig = {
                 email: {label: "Email", type: "email"},
                 password: {label: "Password", type: "password"}
             },
-            async authorize(credentials: Partial<Record<"email" | "password", any>>, req) {
+            async authorize(credentials: Partial<Record<"email" | "password", any>>, req): Promise<User | null> {
                 const userClient = Registry.instance.userService;
                 const user = await userClient.getByEmail(credentials.email);
 
