@@ -16,14 +16,14 @@ export default async function AdminDashboard({children}: { children: React.React
     return (
         <div className={'container-fluid'}>
             <div className={'row'}>
-                <div className={'flex-column bg-light p-3 rounded'} style={{width: '280px'}}>
+                <div className={'flex-column bg-light p-3 rounded shadow'} style={{width: '280px'}}>
                     <ul className={'nav nav-pills flex-column'}>
                         <li><MenuItem href={'/admin/games'} value={'Игры'} iconPath={'/icons/joystick.svg'}/></li>
                         <li><MenuItem href={'/admin/users'} value={'Пользователи'} iconPath={'/icons/people-fill.svg'}/></li>
                     </ul>
                 </div>
                 <div className={'vr p-0 ms-3 me-4 bg-secondary'}></div>
-                <div className={'col bg-light p-3 rounded'}>
+                <div className={'col bg-light p-3 rounded shadow'}>
                     {children}
                 </div>
             </div>
