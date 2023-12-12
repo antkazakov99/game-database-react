@@ -1,4 +1,5 @@
-import {Card, CardBody, CardHeader, Col, Image, Row} from "react-bootstrap";
+import {Card, CardBody, CardHeader, Col, Row} from "react-bootstrap";
+import Image from "next/image";
 import Link from "next/link";
 import * as fs from "fs";
 import Game from "@/lib/entities/Game";
@@ -11,7 +12,7 @@ type Repo = {
 
 
 export default function GameCard({game}: { game: Game }) {
-    let imagePath = `${process.env.STORAGE_PATH}/covers/horizontal/default.jpg`;
+    let imagePath = `${process.env.STORAGE_PATH}/default/horizontal.jpg`;
 
     if (game.horizontalCoverName) {
         imagePath = `${process.env.STORAGE_PATH}/${game.horizontalCoverName}`;
@@ -22,7 +23,7 @@ export default function GameCard({game}: { game: Game }) {
             <Row className={'game-card-content'}>
                 <Col xs={'auto'} className={'pe-0'}>
                     <div className={'game-card-cover d-flex align-items-center'}>
-                        <Image src={imagePath} className={'mh-100 mw-100 rounded-start'}></Image>
+                        <Image src={imagePath} alt={game.name} width={240} height={135} style={{ width: '100%', height: 'auto' }} className={'mh-100 mw-100 rounded-start'}></Image>
                     </div>
                 </Col>
                 <Col className={'ps-0'}>

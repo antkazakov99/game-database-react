@@ -2,7 +2,6 @@ import Registry from "@/lib/Registry";
 import {notFound} from "next/navigation";
 import Image from 'next/image';
 import React from 'react';
-import DefaultUserIcon from '@/lib/components/utils/DefaultUserIcon';
 import {Star} from 'react-bootstrap-icons';
 import Link from 'next/link';
 
@@ -20,6 +19,11 @@ export default async function GamePage({params}: {
         notFound()
     }
 
+    let coverPath = `${process.env.STORAGE_PATH}/default/vertical.jpg`;
+    if (game.verticalCoverName) {
+        coverPath = `${process.env.STORAGE_PATH}/${game.verticalCoverName}`;
+    }
+
     const criticRating = await Registry.instance.criticReviewService.getAvgRatingByGameId(game.id!!);
     const userRating = await Registry.instance.userReviewService.getAvgRatingByGameId(game.id!!);
 
@@ -27,7 +31,8 @@ export default async function GamePage({params}: {
         <div className={'container-fluid'}>
             <div className={'row bg-light p-3 rounded shadow mb-5'}>
                 <div className={'me-4'} style={{width: 240, height: 360}}>
-                    <Image className={'rounded'} src={`${process.env.STORAGE_PATH}/${game.verticalCoverName}`} alt={game.name} width={240}
+                    <Image className={'rounded'} src={coverPath}
+                           alt={game.name} width={240}
                            height={320}/>
                 </div>
                 <div className={'col'}>
