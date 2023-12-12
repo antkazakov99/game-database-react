@@ -9,7 +9,7 @@ export default class UserReviewService extends AbstractService<UserReview> {
      * @param gameId
      */
     async get(userId: number, gameId: number): Promise<UserReview | null> {
-        const query = 'SELECT user_id, game_id, summary, rating FROM user_reviews WHERE game_id = $1 AND user_id = $2';
+        const query = 'SELECT user_id, game_id, summary, rating FROM user_reviews WHERE user_id = $1 AND game_id = $2';
         return await this.findOne(query, [userId, gameId]);
     }
 
@@ -26,7 +26,7 @@ export default class UserReviewService extends AbstractService<UserReview> {
      * @param userReview
      */
     async add(userReview: UserReview): Promise<void> {
-        const query = 'INSERT INTO user_reviews (user_id, game_id, summary, rating) VALUES($1, $2, $3, $4, $5)';
+        const query = 'INSERT INTO user_reviews (user_id, game_id, summary, rating) VALUES($1, $2, $3, $4) ON CONFLICT (user_id, game_id) DO UPDATE SET (user_id, game_id, summary, rating) = ($1, $2, $3, $4)';
         await this.exec(query, [userReview.userId, userReview.gameId, userReview.summary, userReview.rating]);
     }
 
