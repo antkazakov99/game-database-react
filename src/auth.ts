@@ -24,7 +24,8 @@ export const authConfig = {
     ],
     pages: {
         error: "/"
-    }
+    },
+    trustHost: true
 }
 
 export const {handlers: {GET, POST}, auth} = NextAuth(authConfig);
