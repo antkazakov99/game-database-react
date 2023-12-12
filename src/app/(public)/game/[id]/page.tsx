@@ -27,7 +27,7 @@ export default async function GamePage({params}: {
         <div className={'container-fluid'}>
             <div className={'row bg-light p-3 rounded shadow mb-5'}>
                 <div className={'me-4'} style={{width: 240, height: 360}}>
-                    <Image className={'rounded'} src={`/games/covers/vertical/${id}.jpg`} alt={game.name} width={240}
+                    <Image className={'rounded'} src={`${process.env.STORAGE_PATH}/${game.verticalCoverName}`} alt={game.name} width={240}
                            height={320}/>
                 </div>
                 <div className={'col'}>

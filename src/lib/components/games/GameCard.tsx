@@ -4,18 +4,25 @@ import * as fs from "fs";
 import Game from "@/lib/entities/Game";
 import Registry from '@/lib/Registry';
 
+type Repo = {
+    imagePath: string;
+}
+
+
+
 export default function GameCard({game}: { game: Game }) {
-    const defaultPath = 'games/covers/horizontal/default.jpg';
-    const imagePath = `games/covers/horizontal/${game.id}.jpg`;
-    const isImageExists = fs.existsSync(`public/${imagePath}`);
+    let imagePath = `${process.env.STORAGE_PATH}/covers/horizontal/default.jpg`;
+
+    if (game.horizontalCoverName) {
+        imagePath = `${process.env.STORAGE_PATH}/${game.horizontalCoverName}`;
+    }
 
     return (
         <Card className={'game-card mb-2'}>
             <Row className={'game-card-content'}>
                 <Col xs={'auto'} className={'pe-0'}>
                     <div className={'game-card-cover d-flex align-items-center'}>
-                        <Image src={isImageExists ? imagePath : defaultPath}
-                               className={'mh-100 mw-100 rounded-start'}></Image>
+                        <Image src={imagePath} className={'mh-100 mw-100 rounded-start'}></Image>
                     </div>
                 </Col>
                 <Col className={'ps-0'}>

@@ -6,11 +6,13 @@ export default class Game {
     private _description: string;
     private _developers: Developer[] = [];
     private _genres: Genre[] = [];
+    private _horizontalCoverName: string | null = null;
     private readonly _id: number | null;
     private _name: string;
     private _publishers: Publisher[] = [];
     private _release: Date | null;
     private _url: string;
+    private _verticalCoverName: string | null = null;
 
     constructor(
         id: number | null,
@@ -50,6 +52,14 @@ export default class Game {
         this._genres = value;
     }
 
+    public get horizontalCoverName(): string | null {
+        return this._horizontalCoverName;
+    }
+
+    public set horizontalCoverName(value: string | null) {
+        this._horizontalCoverName = value;
+    }
+
     get id(): number | null {
         return this._id;
     }
@@ -84,5 +94,13 @@ export default class Game {
 
     set url(value: string) {
         this._url = value;
+    }
+
+    public get verticalCoverName(): string | null {
+        return this._verticalCoverName;
+    }
+
+    public set verticalCoverName(value: string | null) {
+        this._verticalCoverName = value;
     }
 }

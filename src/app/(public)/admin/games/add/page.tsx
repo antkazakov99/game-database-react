@@ -11,7 +11,9 @@ export default function AddGame() {
         url: string,
         developers: string[],
         publishers: string[],
-        genres: string[]
+        genres: string[],
+        verticalCover: string | null,
+        horizontalCover: string | null
     }>({
         name: '',
         release: '',
@@ -19,7 +21,9 @@ export default function AddGame() {
         url: '',
         developers: [],
         publishers: [],
-        genres: []
+        genres: [],
+        verticalCover: null,
+        horizontalCover: null
     });
 
     const [developers, setDevelopers] = useState<{
@@ -113,15 +117,49 @@ export default function AddGame() {
         setGame({...game, genres: selected});
     }
 
+    const [verticalCover, setVerticalCover] = useState<File | null>(null);
+
+    const handleVerticalCoverSelect: ChangeEventHandler<HTMLInputElement> = async function (event) {
+        if (event.target.files) {
+            setVerticalCover(event.target.files[0]);
+        }
+    }
+
+    const [horizontalCover, setHorizontalCover] = useState<File | null>(null);
+
+    const handleHorizontalCoverSelect: ChangeEventHandler<HTMLInputElement> = async function (event) {
+        if (event.target.files) {
+            setHorizontalCover(event.target.files[0]);
+        }
+    }
+
     const router = useRouter();
     const handleSubmit: FormEventHandler = function (event) {
         event.preventDefault();
-        fetch('/api/games/add', {
-            method: 'POST',
-            body: JSON.stringify(game)
-        }).then(
-            () => router.push('/admin/games')
-        )
+        const addGame = async function () {
+            let verticalCoverPath: string | null = null;
+            if (verticalCover) {
+                const response = await fetch(`/api/images/add`, {
+                    method: 'POST',
+                    body: verticalCover
+                });
+                verticalCoverPath = (await response.json()).fileName;
+            }
+            let horizontalCoverPath: string | null = null;
+            if (horizontalCover) {
+                const response = await fetch(`/api/images/add`, {
+                    method: 'POST',
+                    body: horizontalCover
+                });
+                horizontalCoverPath = (await response.json()).fileName;
+            }
+            await fetch('/api/games/add', {
+                method: 'POST',
+                body: JSON.stringify({...game, verticalCover: verticalCoverPath, horizontalCover: horizontalCoverPath})
+            });
+            router.push('/admin/games');
+        }
+        addGame();
     }
 
     if (!isLoaded) {
@@ -138,7 +176,13 @@ export default function AddGame() {
             </div>
             <div className={'mb-3'}>
                 <label className={'form-label'}>Обложка (Вертикальная)</label>
-                <input name={'vertical-cover'} className={'form-control'} type={'file'}/>
+                <input name={'vertical-cover'} className={'form-control'} type={'file'} accept={'.jpg'}
+                       onChange={handleVerticalCoverSelect}/>
+            </div>
+            <div className={'mb-3'}>
+                <label className={'form-label'}>Обложка (Горизонтальная)</label>
+                <input name={'vertical-cover'} className={'form-control'} type={'file'} accept={'.jpg'}
+                       onChange={handleHorizontalCoverSelect}/>
             </div>
             <div className={'mb-3'}>
                 <label className={'form-label'}>Дата выхода</label>

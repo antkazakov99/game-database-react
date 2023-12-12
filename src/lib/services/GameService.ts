@@ -17,8 +17,8 @@ export default class GameService extends AbstractService<Game> {
      * @param game
      */
     async add(game: Game): Promise<void> {
-        const query = 'INSERT INTO games (name, release, description, url) VALUES ($1, $2, $3, $4) RETURNING id';
-        const rows: {id: number}[] = await this.exec(query, [game.name, game.release, game.description, game.url]);
+        const query = 'INSERT INTO games (name, release, description, url, vertical_cover, horizontal_cover) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+        const rows: {id: number}[] = await this.exec(query, [game.name, game.release, game.description, game.url, game.verticalCoverName, game.horizontalCoverName]);
         const id: number = rows[0].id;
         if (id) {
             await this.updateDevelopersList(id, game.developers);
@@ -43,7 +43,7 @@ export default class GameService extends AbstractService<Game> {
      * Возващает все добавленные игры
      */
     async getAll(): Promise<Game[]> {
-        const query = 'SELECT games.id, games.name, games.release, games.description, games.url FROM games';
+        const query = 'SELECT id, name, release, description, url, vertical_cover, horizontal_cover FROM games';
         return this.findMany(query);
     }
 
@@ -52,7 +52,7 @@ export default class GameService extends AbstractService<Game> {
      * @param id
      */
     async getById(id: number): Promise<Game | null> {
-        const query = 'SELECT id, name, release, description, url FROM games WHERE id = $1';
+        const query = 'SELECT id, name, release, description, url, vertical_cover, horizontal_cover FROM games WHERE id = $1';
         return this.findOne(query, [id]);
     }
 
@@ -102,7 +102,9 @@ export default class GameService extends AbstractService<Game> {
         name: string,
         release: string | null,
         description: string,
-        url: string
+        url: string,
+        vertical_cover: string,
+        horizontal_cover: string
     }): Awaitable<Game> {
         const game = new Game(
             fields.id,
@@ -111,6 +113,9 @@ export default class GameService extends AbstractService<Game> {
             fields.description,
             fields.url
         );
+
+        game.verticalCoverName = fields.vertical_cover;
+        game.horizontalCoverName = fields.horizontal_cover;
 
         return (async () => {
             const registry = Registry.instance;

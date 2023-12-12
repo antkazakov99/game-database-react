@@ -5,10 +5,12 @@ import Publisher from '@/lib/entities/Publisher';
 import Genre from '@/lib/entities/Genre';
 
 export async function POST(request: Request): Promise<Response> {
-    const gameData: { name: string, release: string | null, description: string, url: string, developers: string[], publishers: string[], genres: string[] } = await request.json();
+    const gameData: { name: string, release: string | null, description: string, url: string, developers: string[], publishers: string[], genres: string[], verticalCover: string | null, horizontalCover: string | null } = await request.json();
     let response: { success: boolean, errors: { code: string, message: string }[] } = {success: true, errors: []};
 
     const game = new Game(null, gameData.name, gameData.release ? new Date(gameData.release) : null, gameData.description, gameData.url);
+    game.verticalCoverName = gameData.verticalCover;
+    game.horizontalCoverName = gameData.horizontalCover;
     game.developers = gameData.developers.map((value) => new Developer(parseInt(value), value));
     game.publishers = gameData.publishers.map((value) => new Publisher(parseInt(value), value));
     game.genres = gameData.genres.map((value) => new Genre(parseInt(value), value));
