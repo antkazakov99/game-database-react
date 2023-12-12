@@ -40,7 +40,14 @@ export default class Registry {
 
     public get config() {
         if (!this._config) {
-            this._config = require('@/config.json');
+            // this._config = require('@/config.json');
+            this._config = {
+                user: process.env.DB_USER,
+                host: process.env.DB_HOST,
+                database: process.env.DB_NAME,
+                password: process.env.DB_PASS,
+                port: process.env.DB_PORT
+            };
         }
         return this._config;
     }
