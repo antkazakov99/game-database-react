@@ -55,6 +55,12 @@ export default class CriticReviewService extends AbstractService<CriticReview> {
         return rows[0].rating;
     }
 
+    // todo replace in future
+    async getWithNames(gameId: number) {
+        const query = 'SELECT critic_id, critics.name as critic_name, game_id, summary, critic_reviews.url, rating FROM critic_reviews JOIN critics ON critic_reviews.critic_id = critics.id WHERE game_id = $1';
+        return await this.exec(query, [gameId]);
+    }
+
     protected createObject(fields: {
         critic_id: number,
         game_id: number,

@@ -28,7 +28,7 @@ export default async function GamePage({params}: { params: { id: string } }) {
     }
 
     let addReview = <></>;
-    if (session?.user.id && game.release && game.release.getTime() < (new Date().getTime())) {
+    if (session && game.release && game.release.getTime() < (new Date().getTime())) {
         addReview = (
             <div className={'row bg-light p-3 rounded shadow mb-5'}>
                 <GamePageAddReview gameId={game.id} userId={session.user.id}/>

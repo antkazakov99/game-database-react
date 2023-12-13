@@ -25,7 +25,11 @@ export default function Rating({gameId, released}: { gameId: number, released: b
             const promises: Promise<any>[] = [];
 
             const getAvgUserRating = fetch(`/api/user-reviews?game_id=${gameId}&average=true`).then((value) => value.json()).then((value) => {
-                setUserRating(round(value['rating'] * 100) / 100);
+                setUserRating(round(value['rating'] * 10) / 10);
+            });
+
+            const getAvgCriticRating = fetch(`/api/critic-reviews?game_id=${gameId}&average=true`).then((value) => value.json()).then((value) => {
+                setCriticRating(round(value['rating'] * 10) / 10);
             })
 
             if (userId) {
@@ -53,7 +57,9 @@ export default function Rating({gameId, released}: { gameId: number, released: b
                 promises.push(getReview);
             }
 
+
             promises.push(getAvgUserRating);
+            promises.push(getAvgCriticRating);
 
             const response = await Promise.all(promises);
 
@@ -227,21 +233,25 @@ export default function Rating({gameId, released}: { gameId: number, released: b
                     <div className={'col'}>
                         <div className={'mb-3'}>
                             <div className={'fw-semibold mb-2'}>Оценка пользователей</div>
-                            <div className={`d-inline-block fs-3 fw-semibold ${userColor} rounded`} style={{
-                                lineHeight: '60px',
-                                textAlign: 'center',
-                                width: 60,
-                                height: 60
-                            }}>{userRating ? userRating : '–'}</div>
+                            <div className={'p-3'}>
+                                <div className={`d-inline-block fs-3 fw-semibold ${userColor} rounded`} style={{
+                                    lineHeight: '60px',
+                                    textAlign: 'center',
+                                    width: 60,
+                                    height: 60
+                                }}>{userRating ? userRating : '–'}</div>
+                            </div>
                         </div>
                         <div className={'mb-3'}>
                             <div className={'fw-semibold mb-2'}>Оценка критиков</div>
-                            <div className={`d-inline-block fs-3 fw-semibold ${criticColor} rounded`} style={{
-                                lineHeight: '60px',
-                                textAlign: 'center',
-                                width: 60,
-                                height: 60
-                            }}>{criticRating ? criticRating : '–'}</div>
+                            <div className={'p-3'}>
+                                <div className={`d-inline-block fs-3 fw-semibold ${criticColor} rounded`} style={{
+                                    lineHeight: '60px',
+                                    textAlign: 'center',
+                                    width: 60,
+                                    height: 60
+                                }}>{criticRating ? criticRating : '–'}</div>
+                            </div>
                         </div>
                     </div>
                     <div className={'col'}>

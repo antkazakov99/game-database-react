@@ -11,26 +11,46 @@ export default async function GameCard({game}: { game: Game }) {
     }
 
     const avg = await Registry.instance.userReviewService.getAvgRatingByGameId(game.id!!);
+    const criticAvg = await Registry.instance.criticReviewService.getAvgRatingByGameId(game.id!!);
 
     return (
         <div className={'card rounded bg-light rounded shadow border-light-subtle'}>
-            <Image className={'card-img rounded-top w-auto h-auto'} src={imagePath} alt={game.name} width={900}
+            <Image className={'card-img-top rounded-top w-auto h-auto'} src={imagePath} alt={game.name} width={900}
                    height={600}/>
-            <div
-                className={`position-absolute fs-5 fw-semibold top-0 end-0 m-3 ${avg ? avg >= 7 ? 'text-bg-success' : avg >= 5 ? 'text-bg-warning' : 'text-bg-danger' : 'text-bg-secondary'} rounded me-3`}
-                style={{
-                    lineHeight: '50px',
-                    textAlign: 'center',
-                    width: 50,
-                    height: 50,
-                    opacity: 0.7
-                }}>
-                {avg ? round(avg * 100) / 100 : '–'}
-            </div>
             <div className={'card-body'}>
                 <h6 className={'card-title mb-3'}><Link style={{textDecoration: 'none'}} className='card-link'
                                                         href={`/game/${game.id}`}>{game.name}</Link></h6>
-                <div style={{display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 20, rowGap: 4}}>
+                <hr/>
+                <div style={{display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 20, rowGap: 8, alignItems: 'center'}}>
+                    <div className={''}>Оценка пользователей</div>
+                    <div>
+                        <div
+                            className={`fs-5 fw-semibold ${avg ? avg >= 7 ? 'text-bg-success' : avg >= 5 ? 'text-bg-warning' : 'text-bg-danger' : 'text-bg-secondary'} rounded`}
+                            style={{
+                                lineHeight: '40px',
+                                textAlign: 'center',
+                                width: 40,
+                                height: 40
+                            }}>
+                            {avg ? round(avg * 10) / 10 : '–'}
+                        </div>
+                    </div>
+                    <div>Оценка критиков</div>
+                    <div>
+                        <div
+                            className={`fs-5 fw-semibold ${criticAvg ? criticAvg >= 7 ? 'text-bg-success' : criticAvg >= 5 ? 'text-bg-warning' : 'text-bg-danger' : 'text-bg-secondary'} rounded`}
+                            style={{
+                                lineHeight: '40px',
+                                textAlign: 'center',
+                                width: 40,
+                                height: 40
+                            }}>
+                            {criticAvg ? round(criticAvg * 10) / 10 : '–'}
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div style={{display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 20, rowGap: 8, alignItems: 'center'}}>
                     <div>Дата выхода</div>
                     <div>{game.release ? Registry.instance.dateTimeFormatter.format(game.release) : 'TBA'}</div>
                     <div>Разработчики</div>
@@ -40,28 +60,5 @@ export default async function GameCard({game}: { game: Game }) {
                 </div>
             </div>
         </div>
-    )
-
-    // return (
-    //     <Card className={'game-card mb-3 shadow-sm border-light-subtle'}>
-    //         <Row className={'game-card-content'}>
-    //             <Col xs={'auto'} className={'pe-0'}>
-    //                 <div className={'game-card-cover d-flex align-items-center'}>
-    //                     <Image src={imagePath} alt={game.name} width={240} height={135}
-    //                            style={{width: '100%', height: 'auto'}}
-    //                            className={'mh-100 mw-100 rounded-start'}></Image>
-    //                 </div>
-    //             </Col>
-    //             <Col className={'ps-0'}>
-    //                 <CardHeader><Link href={`/game/${game.id}`}>{game.name}</Link></CardHeader>
-    //                 <CardBody>
-    //                     <div>Дата
-    //                         выхода: {game.release ? Registry.instance.dateTimeFormatter.format(game.release) : 'TBA'}</div>
-    //                     <div>Разработчик(и): {game.developers.map((value) => value.name).toString()}</div>
-    //                     <div>Издател(и): {game.publishers.map((value) => value.name).toString()}</div>
-    //                 </CardBody>
-    //             </Col>
-    //         </Row>
-    //     </Card>
-    // )
+    );
 }

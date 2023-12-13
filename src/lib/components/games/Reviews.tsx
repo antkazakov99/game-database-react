@@ -4,10 +4,13 @@ import React, {useEffect, useState} from 'react';
 import {useSession} from 'next-auth/react';
 import {Dropdown} from '@restart/ui';
 import displayName = Dropdown.displayName;
+import Link from 'next/link';
 
 export default function Reviews({gameId}: { gameId: number }) {
     const {data: session} = useSession();
     const [selectedTab, setSelectedTab] = (useState<'critics' | 'users'>('critics'));
+    const [isLoaded, setIsLoaded] = (useState(false));
+
 
     const handleSelectCritics = function () {
         setSelectedTab('critics');
@@ -24,21 +27,39 @@ export default function Reviews({gameId}: { gameId: number }) {
         user_id: number
     }[]>([]));
     const [criticReviews, setCriticReviews] = (useState<{
+        critic_id: number,
+        critic_name: string,
         name: string,
         url: string,
         summary: string | null,
         rating: number | null
     }[]>([]));
     useEffect(() => {
-        fetch(`/api/user-reviews?usernames=true&game_id=${gameId}`)
-            .then((response) => response.json())
-            .then((response) => setUserReviews(response));
+        const loadData = async function() {
+            let promises = [];
+            const userPromise = fetch(`/api/user-reviews?usernames=true&game_id=${gameId}`)
+                .then((response) => response.json())
+                .then((response) => setUserReviews(response));
+            const criticPromise = fetch(`/api/critic-reviews?names=true&game_id=${gameId}`)
+                .then((response) => response.json())
+                .then((response) => setCriticReviews(response));
+
+            promises.push(userPromise, criticPromise);
+
+            await Promise.all(promises);
+
+            setIsLoaded(true);
+        }
+
+        loadData();
     }, []);
+
+
 
     let reviews = <></>;
     if (selectedTab === 'users') {
         reviews = (
-            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: '30px',rowGap: '30px', minHeight: 300}}>
+            <div className={'games-list'} style={{minHeight: 300}}>
                 {userReviews
                     .filter((value) => value.summary && value.user_id !== session?.user.id)
                     .map((value) =>
@@ -60,7 +81,37 @@ export default function Reviews({gameId}: { gameId: number }) {
             </div>
         );
     } else if (selectedTab === 'critics') {
-        reviews = <div style={{minHeight: 300}}></div>
+        reviews = <div className={'games-list'} style={{minHeight: 300}}>
+            {criticReviews
+                .map((value) =>
+                    <div key={value.critic_id} className={'card border-light-subtle shadow-sm'} style={{minHeight: 250}}>
+                        <div className={'card-header hstack'}>
+                            <div className={'me-3 fs-5 fw-semibold me-auto p-3'}>{value.critic_name}</div>
+                            <div
+                                className={`d-inline-block fs-4 fw-semibold ${value.rating ? value.rating >= 7 ? 'text-bg-success' : value.rating >= 5 ? 'text-bg-warning' : 'text-bg-danger' : 'text-bg-secondary'} rounded me-3`}
+                                style={{
+                                    lineHeight: '50px',
+                                    textAlign: 'center',
+                                    width: 50,
+                                    height: 50
+                                }}>{value.rating ? value.rating : '–'}</div>
+                        </div>
+                        <div className={'card-body p-4'}>
+                            <p>
+                                {value.summary}
+                            </p>
+                            <Link style={{textDecoration: 'none'}} target={'_blank'} className='card-link' href={value.url}>Читать полностью</Link>
+                        </div>
+                    </div>
+                )}
+        </div>
+    }
+
+    if (!isLoaded) {
+        return <>
+            <h3 className={'mb-3'}>Рецензии</h3>
+            <div>Loading... Please, wait.</div>
+        </>
     }
 
     return (
