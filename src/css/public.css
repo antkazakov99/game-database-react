@@ -59,3 +59,194 @@
 .user-icon-authorized .dropdown-toggle {
     border: 0;
 }
+
+:root {
+    --mask-size: 80%;
+}
+
+.rating-one, .rating-two, .rating-three, .rating-four, .rating-five, .rating-six, .rating-seven, .rating-eight, .rating-nine, .rating-ten {
+    -webkit-mask: url("/icons/star.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+    background-color: black;
+    cursor: pointer;
+}
+
+[data-hover] div,
+[data-selected]:not([data-hover]) div
+{
+    background-color: currentColor;
+}
+
+[data-hover="1"],
+[data-hover="2"],
+[data-hover="3"],
+[data-hover="4"],
+[data-selected="1"]:not([data-hover]),
+:not([data-hover])[data-selected="2"],
+:not([data-hover])[data-selected="3"],
+:not([data-hover])[data-selected="4"]
+{
+    color: red;
+}
+
+[data-hover="5"],
+[data-hover="6"],
+:not([data-hover])[data-selected="5"],
+:not([data-hover])[data-selected="6"]
+{
+    color: orange;
+}
+
+[data-hover="7"],
+[data-hover="8"],
+[data-hover="9"],
+[data-hover="10"],
+:not([data-hover])[data-selected="7"],
+:not([data-hover])[data-selected="8"],
+:not([data-hover])[data-selected="9"],
+:not([data-hover])[data-selected="10"]
+{
+    color: green;
+}
+
+[data-hover] .rating-one,
+:not([data-hover])[data-selected] .rating-one
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+     -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="2"] .rating-two,
+[data-hover="3"] .rating-two,
+[data-hover="4"] .rating-two,
+[data-hover="5"] .rating-two,
+[data-hover="6"] .rating-two,
+[data-hover="7"] .rating-two,
+[data-hover="8"] .rating-two,
+[data-hover="9"] .rating-two,
+[data-hover="10"] .rating-two,
+:not([data-hover])[data-selected="2"] .rating-two,
+:not([data-hover])[data-selected="3"] .rating-two,
+:not([data-hover])[data-selected="4"] .rating-two,
+:not([data-hover])[data-selected="5"] .rating-two,
+:not([data-hover])[data-selected="6"] .rating-two,
+:not([data-hover])[data-selected="7"] .rating-two,
+:not([data-hover])[data-selected="8"] .rating-two,
+:not([data-hover])[data-selected="9"] .rating-two,
+:not([data-hover])[data-selected="10"] .rating-two
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="3"] .rating-three,
+[data-hover="4"] .rating-three,
+[data-hover="5"] .rating-three,
+[data-hover="6"] .rating-three,
+[data-hover="7"] .rating-three,
+[data-hover="8"] .rating-three,
+[data-hover="9"] .rating-three,
+[data-hover="10"] .rating-three,
+:not([data-hover])[data-selected="3"] .rating-three,
+:not([data-hover])[data-selected="4"] .rating-three,
+:not([data-hover])[data-selected="5"] .rating-three,
+:not([data-hover])[data-selected="6"] .rating-three,
+:not([data-hover])[data-selected="7"] .rating-three,
+:not([data-hover])[data-selected="8"] .rating-three,
+:not([data-hover])[data-selected="9"] .rating-three,
+:not([data-hover])[data-selected="10"] .rating-three
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="4"] .rating-four,
+[data-hover="5"] .rating-four,
+[data-hover="6"] .rating-four,
+[data-hover="7"] .rating-four,
+[data-hover="8"] .rating-four,
+[data-hover="9"] .rating-four,
+[data-hover="10"] .rating-four,
+:not([data-hover])[data-selected="4"] .rating-four,
+:not([data-hover])[data-selected="5"] .rating-four,
+:not([data-hover])[data-selected="6"] .rating-four,
+:not([data-hover])[data-selected="7"] .rating-four,
+:not([data-hover])[data-selected="8"] .rating-four,
+:not([data-hover])[data-selected="9"] .rating-four,
+:not([data-hover])[data-selected="10"] .rating-four
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="5"] .rating-five,
+[data-hover="6"] .rating-five,
+[data-hover="7"] .rating-five,
+[data-hover="8"] .rating-five,
+[data-hover="9"] .rating-five,
+[data-hover="10"] .rating-five,
+:not([data-hover])[data-selected="5"] .rating-five,
+:not([data-hover])[data-selected="6"] .rating-five,
+:not([data-hover])[data-selected="7"] .rating-five,
+:not([data-hover])[data-selected="8"] .rating-five,
+:not([data-hover])[data-selected="9"] .rating-five,
+:not([data-hover])[data-selected="10"] .rating-five
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="6"] .rating-six,
+[data-hover="7"] .rating-six,
+[data-hover="8"] .rating-six,
+[data-hover="9"] .rating-six,
+[data-hover="10"] .rating-six,
+:not([data-hover])[data-selected="6"] .rating-six,
+:not([data-hover])[data-selected="7"] .rating-six,
+:not([data-hover])[data-selected="8"] .rating-six,
+:not([data-hover])[data-selected="9"] .rating-six,
+:not([data-hover])[data-selected="10"] .rating-six
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="7"] .rating-seven,
+[data-hover="8"] .rating-seven,
+[data-hover="9"] .rating-seven,
+[data-hover="10"] .rating-seven,
+:not([data-hover])[data-selected="7"] .rating-seven,
+:not([data-hover])[data-selected="8"] .rating-seven,
+:not([data-hover])[data-selected="9"] .rating-seven,
+:not([data-hover])[data-selected="10"] .rating-seven
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="8"] .rating-eight,
+[data-hover="9"] .rating-eight,
+[data-hover="10"] .rating-eight,
+:not([data-hover])[data-selected="8"] .rating-eight,
+:not([data-hover])[data-selected="9"] .rating-eight,
+:not([data-hover])[data-selected="10"] .rating-eight
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="9"] .rating-nine,
+[data-hover="10"] .rating-nine,
+:not([data-hover])[data-selected="9"] .rating-nine,
+:not([data-hover])[data-selected="10"] .rating-nine
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}
+
+[data-hover="10"] .rating-ten,
+:not([data-hover])[data-selected="10"] .rating-ten
+{
+    -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
+    -webkit-mask-size: var(--mask-size);
+}

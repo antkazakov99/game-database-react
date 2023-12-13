@@ -15,7 +15,6 @@ export default function GamePageAddReview({gameId, userId}: { gameId: number, us
                 if (value.summary) {
                     setUserReview({...userReview, summary: value.summary, rating: value.rating});
                     setMode('published');
-                } else {
                 }
                 setIsLoaded(true);
             }
@@ -77,11 +76,14 @@ export default function GamePageAddReview({gameId, userId}: { gameId: number, us
     }
 
     if (!isLoaded) {
-        return 'Loading... Please, wait.';
+        return <>
+            <h3 className={'mb-3'}>Написать отзыв</h3>
+            <div>Loading... Please, wait.</div>
+        </>
     }
 
     return (
-        <div>
+        <>
             <h3 className={'mb-3'}>Написать отзыв</h3>
             <form className={'p-3'} onSubmit={submitHandle}>
                 <div className={'mb-4'}>
@@ -89,6 +91,6 @@ export default function GamePageAddReview({gameId, userId}: { gameId: number, us
                 </div>
                 {buttonPanel}
             </form>
-        </div>
+        </>
     );
 }

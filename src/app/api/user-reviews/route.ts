@@ -5,6 +5,7 @@ export async function GET(request: Request): Promise<Response> {
     const userId = searchParams.get('user_id');
     const gameId = searchParams.get('game_id');
     const usernames = searchParams.get('usernames');
+    const average = searchParams.get('average');
 
     let response = {};
     if (userId && gameId)  {
@@ -16,6 +17,11 @@ export async function GET(request: Request): Promise<Response> {
 
     if (gameId && usernames && usernames === 'true') {
         response = await Registry.instance.userReviewService.getWithUsernames(parseInt(gameId));
+    }
+
+    if (gameId && average === 'true') {
+        let rating = await Registry.instance.userReviewService.getAvgRatingByGameId(parseInt(gameId));
+        response = {rating: rating};
     }
 
     return Response.json(response);

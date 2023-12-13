@@ -2,6 +2,7 @@ import {Button, Form, Modal, Stack} from "react-bootstrap";
 import Link from "next/link";
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import {signIn} from "next-auth/react";
+import {useRouter} from 'next/navigation';
 
 export default function SignInForm ({onHide, onSignUp}: {onHide: () => void, onSignUp: () => void}) {
     const [userCredentials, setUserCredentials] = useState({email: "", password: ""});
@@ -16,11 +17,13 @@ export default function SignInForm ({onHide, onSignUp}: {onHide: () => void, onS
 
     const [invalidCredentials, setInvalidCredentials] = useState(false);
 
+    const router = useRouter()
+
     const handleSubmit: FormEventHandler = async (e) => {
         e.preventDefault();
         const response = await signIn("credentials", {...userCredentials, redirect: false});
         if (response != undefined && !response.error) {
-            onHide();
+            router.push('/');
         } else {
             setInvalidCredentials(true);
         }

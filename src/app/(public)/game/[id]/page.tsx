@@ -5,6 +5,7 @@ import React from 'react';
 import GamePageAddReview from '@/lib/components/games/GamePageAddReview';
 import {auth} from '@/auth';
 import Reviews from '@/lib/components/games/Reviews';
+import Rating from '@/lib/components/games/Rating';
 
 export default async function GamePage({params}: { params: { id: string } }) {
     let session = await auth();
@@ -54,6 +55,9 @@ export default async function GamePage({params}: { params: { id: string } }) {
                         <div><a href={game.url}>{game.url}</a></div>
                     </div>
                 </div>
+            </div>
+            <div className={'row bg-light p-3 rounded shadow mb-5'}>
+                <Rating gameId={game.id} released={game.release !== null}/>
             </div>
             {addReview}
             <div className={'row bg-light p-3 rounded shadow mb-5'}>
