@@ -4,6 +4,7 @@ export async function GET(request: Request): Promise<Response> {
     const {searchParams} = new URL(request.url);
     const userId = searchParams.get('user_id');
     const gameId = searchParams.get('game_id');
+    const usernames = searchParams.get('usernames');
 
     let response = {};
     if (userId && gameId)  {
@@ -11,6 +12,10 @@ export async function GET(request: Request): Promise<Response> {
         if (userReview) {
             response = {summary: userReview.summary, rating: userReview.rating};
         }
+    }
+
+    if (gameId && usernames && usernames === 'true') {
+        response = await Registry.instance.userReviewService.getWithUsernames(parseInt(gameId));
     }
 
     return Response.json(response);

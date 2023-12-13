@@ -1,7 +1,6 @@
-import NextAuth, {NextAuthConfig, Session, User} from "next-auth"
+import NextAuth, {NextAuthConfig, User} from "next-auth"
 import Credentials from "@auth/core/providers/credentials";
 import Registry from "@/lib/Registry";
-import {JWT} from '@auth/core/jwt';
 
 export const authConfig: NextAuthConfig = {
     providers: [
@@ -15,14 +14,35 @@ export const authConfig: NextAuthConfig = {
                 const userClient = Registry.instance.userService;
                 const user = await userClient.getByEmail(credentials.email);
 
-                if (user !== null && user.password === credentials.password) {
-                    return {id: user.id!!.toString(), name: user.username, email: user.email};
+                if (user?.id && user.password === credentials.password) {
+                    return {
+                        id: user.id.toString(),
+                        name: user.username,
+                        email: user.email,
+                        role: user.isAdmin ? 'admin' : 'user'
+                    };
                 } else {
                     return null;
                 }
             }
         })
     ],
+    callbacks: {
+        jwt({token, user}) {
+            if (user) {
+                token.role = user.role;
+                token.id = parseInt(user.id);
+            }
+            return token;
+        },
+        session({session, token}) {
+            if (session?.user) {
+                session.user.id = token.id;
+                session.user.role = token.role;
+            }
+            return session;
+        }
+    },
     pages: {
         error: "/"
     },

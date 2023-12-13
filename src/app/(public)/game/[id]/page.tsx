@@ -4,17 +4,10 @@ import Image from 'next/image';
 import React from 'react';
 import GamePageAddReview from '@/lib/components/games/GamePageAddReview';
 import {auth} from '@/auth';
+import Reviews from '@/lib/components/games/Reviews';
 
-export default async function GamePage({params}: {
-    params: {
-        id: string
-    }
-}) {
+export default async function GamePage({params}: { params: { id: string } }) {
     let session = await auth();
-    let user = null;
-    if (session?.user?.name) {
-        user = await Registry.instance.userService.getByUsername(session.user.name);
-    }
 
     const id = parseInt(params.id);
     if (!id) {
@@ -34,10 +27,10 @@ export default async function GamePage({params}: {
     }
 
     let addReview = <></>;
-    if (user && user.id && game.release && game.release.getTime() < (new Date().getTime())) {
+    if (session?.user.id && game.release && game.release.getTime() < (new Date().getTime())) {
         addReview = (
             <div className={'row bg-light p-3 rounded shadow mb-5'}>
-                <GamePageAddReview gameId={game.id} userId={user.id}/>
+                <GamePageAddReview gameId={game.id} userId={session.user.id}/>
             </div>
         );
     }
@@ -63,14 +56,8 @@ export default async function GamePage({params}: {
                 </div>
             </div>
             {addReview}
-            <div className={'row bg-light p-3 rounded shadow'}>
-                <h3 className={'mb-3'}>Рецензии</h3>
-                <div className={'p-3'}>
-                    <ul className={'nav nav-pills bg-light'}>
-                        <li className={'nav-item'}><a className={'nav-link active'}>Критики</a></li>
-                        <li className={'nav-item'}><a className={'nav-link'}>Пользователи</a></li>
-                    </ul>
-                </div>
+            <div className={'row bg-light p-3 rounded shadow mb-5'}>
+                <Reviews gameId={game.id}/>
             </div>
         </div>
     );

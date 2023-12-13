@@ -49,7 +49,7 @@
 }
 
 .user-icon-authorized .nav-link {
-    padding: 0;
+    padding: 0 !important;
 }
 
 .user-icon-authorized .dropdown-toggle:after {

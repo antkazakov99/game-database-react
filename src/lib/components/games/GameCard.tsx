@@ -12,7 +12,7 @@ export default function GameCard({game}: { game: Game }) {
     }
 
     return (
-        <Card className={'game-card mb-3 shadow'}>
+        <Card className={'game-card mb-3 shadow-sm border-light-subtle'}>
             <Row className={'game-card-content'}>
                 <Col xs={'auto'} className={'pe-0'}>
                     <div className={'game-card-cover d-flex align-items-center'}>

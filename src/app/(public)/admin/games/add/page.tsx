@@ -2,6 +2,7 @@
 
 import React, {ChangeEventHandler, FormEventHandler, useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
+import {release} from 'os';
 
 export default function AddGame() {
     const [game, setGame] = useState<{
@@ -41,23 +42,22 @@ export default function AddGame() {
 
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        async function loadData() {
-            const responseDevelopers = await fetch('/api/developers');
-            const developers = await responseDevelopers.json();
-            setDevelopers(developers);
+        const loadData = async function () {
+            const developersPromise = fetch('/api/developers')
+                .then((response) => response.json());
+            const publishersPromise = fetch('/api/publishers')
+                .then((response) => response.json());
+            const genresPromise = fetch('/api/genres')
+                .then((response) => response.json());
 
-            const responsePublishers = await fetch('/api/publishers');
-            const publishers = await responsePublishers.json();
-            setPublishers(publishers);
+            const response = await Promise.all([developersPromise, publishersPromise, genresPromise]);
 
-            const responseGenres = await fetch('/api/genres');
-            const genres = await responseGenres.json();
-            setGenres(genres);
-
-            setIsLoaded(true);
+            setDevelopers(response[0]);
+            setPublishers(response[1]);
+            setGenres(response[2]);
         }
 
-        loadData();
+        loadData().then(() => setIsLoaded(true));
     }, []);
 
     const developerOptions = developers.map((value) => (

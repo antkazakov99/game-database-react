@@ -4,27 +4,13 @@ import {NavDropdown} from 'react-bootstrap';
 import DefaultUserIcon from '@/lib/components/utils/DefaultUserIcon';
 import {signOut, useSession} from 'next-auth/react';
 import DropdownMenuItem from '@/lib/components/utils/DropdownMenuItem';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 export default function HeaderUserIconAuthorized() {
-    const [isAdmin, setIsAdmin] = useState(false);
     const {data: session} = useSession();
 
-    const userName = session?.user?.name;
-
-    if (userName) {
-        fetch(`/api/users/role?username=${userName}`)
-            .then((response) => response.json())
-            .then((response) => {
-                if (response.role) {
-                    setIsAdmin(response.role === 'admin');
-                }
-            })
-        ;
-    }
-
     let adminPanelLink = <></>;
-    if (isAdmin) {
+    if (session?.user.role === 'admin') {
         adminPanelLink = (
             <>
                 <DropdownMenuItem href={'/admin'} value={'Административный раздел'} iconPath={'/icons/gear.svg'}/>
@@ -37,7 +23,7 @@ export default function HeaderUserIconAuthorized() {
         <div className={'navbar-nav user-icon-authorized'}>
             <NavDropdown title={<DefaultUserIcon className={'d-inline-block shadow'}/>} menuVariant={'dark'} align={'end'}>
                 {adminPanelLink}
-                <NavDropdown.Item href="#" onClick={() => signOut()}>Выйти</NavDropdown.Item>
+                <NavDropdown.Item href="#" onClick={() => signOut({redirect: false})}>Выйти</NavDropdown.Item>
             </NavDropdown>
         </div>
     );

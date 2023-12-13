@@ -2,6 +2,7 @@
 
 import {ChangeEventHandler, FormEventHandler, MouseEventHandler, useEffect, useState} from 'react';
 import UserReview from '@/lib/entities/UserReview';
+import {usePathname, useRouter} from 'next/navigation';
 
 export default function GamePageAddReview({gameId, userId}: { gameId: number, userId: number }) {
     const [mode, setMode] = useState<'new' | 'edit-new' | 'edit' | 'published'>('new')

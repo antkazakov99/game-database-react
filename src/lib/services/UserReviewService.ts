@@ -54,6 +54,12 @@ export default class UserReviewService extends AbstractService<UserReview> {
         return rows[0].rating;
     }
 
+    // todo replace in future
+    async getWithUsernames(game_id: number) {
+        const query = 'SELECT user_id, users.username as username, game_id, summary, rating FROM user_reviews JOIN users ON user_reviews.user_id = users.id WHERE game_id = $1';
+        return await this.exec(query, [game_id]);
+    }
+
     protected createObject(fields: { game_id: number, user_id: number, summary: string | null, rating: number | null }): Awaitable<UserReview> {
         return new UserReview(fields.user_id, fields.game_id, fields.summary, fields.rating);
     }
