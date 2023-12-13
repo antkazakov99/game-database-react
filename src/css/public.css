@@ -250,3 +250,30 @@
     -webkit-mask: url("/icons/star-fill.svg") no-repeat center;
     -webkit-mask-size: var(--mask-size);
 }
+
+@media screen and (max-width: 992px) {
+    .games-list {
+        grid-template-columns: 1fr;
+        display: grid;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .games-list {
+        grid-template-columns: 1fr 1fr;
+        display: grid;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .games-list {
+        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+}

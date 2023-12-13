@@ -60,7 +60,7 @@ export default function Reviews({gameId}: { gameId: number }) {
             </div>
         );
     } else if (selectedTab === 'critics') {
-        reviews = <div>Рецензии критиков</div>
+        reviews = <div style={{minHeight: 300}}></div>
     }
 
     return (
@@ -68,11 +68,10 @@ export default function Reviews({gameId}: { gameId: number }) {
             <h3 className={'mb-3'}>Рецензии</h3>
             <div className={'p-3'}>
                 <ul className={'nav nav-pills bg-light mb-5'}>
-                    <li className={'nav-item me-2'}><a
-                        className={`nav-link${selectedTab === 'critics' ? ' active' : ''}`} href={'#'}
-                        onClick={handleSelectCritics}>Критики</a></li>
-                    <li className={'nav-item'}><a className={`nav-link${selectedTab === 'users' ? ' active' : ''}`}
-                                                  href={'#'} onClick={handleSelectUsers}>Пользователи</a></li>
+                    <li className={'nav-item me-2'}><div
+                        className={`nav-link${selectedTab === 'critics' ? ' active' : ''}`} style={{cursor: 'pointer'}}
+                        onClick={handleSelectCritics}>Критики</div></li>
+                    <li className={'nav-item'}><div className={`nav-link${selectedTab === 'users' ? ' active' : ''}`} style={{cursor: 'pointer'}} onClick={handleSelectUsers}>Пользователи</div></li>
                 </ul>
                 {reviews}
             </div>
