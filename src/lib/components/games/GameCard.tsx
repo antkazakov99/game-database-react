@@ -14,7 +14,7 @@ export default async function GameCard({game}: { game: Game }) {
     const criticAvg = await Registry.instance.criticReviewService.getAvgRatingByGameId(game.id!!);
 
     return (
-        <div className={'card rounded bg-light rounded shadow border-light-subtle'}>
+        <div className={'card bg-light rounded shadow border-light-subtle'}>
             <Image className={'card-img-top rounded-top w-auto h-auto'} src={imagePath} alt={game.name} width={900}
                    height={600}/>
             <div className={'card-body'}>
